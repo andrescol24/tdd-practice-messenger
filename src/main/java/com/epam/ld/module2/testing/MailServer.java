@@ -12,5 +12,7 @@ public class MailServer {
      * @param messageContent the message content
      */
     public void send(String addresses, String messageContent) {
+        System.out.println("Using a SMTP server to send the message...");
+        System.out.println(messageContent);
     }
 }
