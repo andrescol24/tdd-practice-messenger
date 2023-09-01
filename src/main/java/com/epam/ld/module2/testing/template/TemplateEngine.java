@@ -1,7 +1,7 @@
 package com.epam.ld.module2.testing.template;
 
 import com.epam.ld.module2.testing.RuntimeInformation;
-import com.epam.ld.module2.testing.exception.ExpectedPlaceholderException;
+import com.epam.ld.module2.testing.exception.ExpectedParameterException;
 
 import java.util.Optional;
 
@@ -20,7 +20,7 @@ public class TemplateEngine {
         // Validates if the runtime variables has all template variables
         Optional<String> missingParameter = template.findMissingParameter(runtimeInformation);
         if(missingParameter.isPresent())
-            throw new ExpectedPlaceholderException(missingParameter.get());
+            throw new ExpectedParameterException(missingParameter.get());
 
         // Fills the message
         String message = template.getText();

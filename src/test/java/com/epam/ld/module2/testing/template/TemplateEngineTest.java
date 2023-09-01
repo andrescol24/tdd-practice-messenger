@@ -1,7 +1,7 @@
 package com.epam.ld.module2.testing.template;
 
 import com.epam.ld.module2.testing.RuntimeInformation;
-import com.epam.ld.module2.testing.exception.ExpectedPlaceholderException;
+import com.epam.ld.module2.testing.exception.ExpectedParameterException;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -52,15 +52,27 @@ public class TemplateEngineTest {
     }
 
     @Test
-    public void generateMessageThrowsExpectedPlaceholderException() {
+    public void generateMessageThrowsExpectedParameterExceptionTest() {
         Template template = new Template("<h1>Welcome #{name} to our #{projectName} project</h1>");
         RuntimeInformation runtimeInformation = new RuntimeInformation();
         runtimeInformation.addValue("name", "Andrés Morales");
 
         TemplateEngine templateEngine = new TemplateEngine();
         assertThrows(
-                ExpectedPlaceholderException.class,
+                ExpectedParameterException.class,
                 () -> templateEngine.generateMessage(template, runtimeInformation),
                 "projectName parameter not found in the runtime variables");
+    }
+    @Test
+    public void generateMessageSupportPlaceholderTest() {
+        Template template = new Template("<h1>Welcome #{name} to our #{projectName} project</h1>");
+        RuntimeInformation runtimeInformation = new RuntimeInformation();
+        runtimeInformation.addValue("name", "Andrés Morales");
+        runtimeInformation.addValue("projectName", "#{projectName}");
+
+        TemplateEngine templateEngine = new TemplateEngine();
+        String message = templateEngine.generateMessage(template, runtimeInformation);
+
+        assertEquals("<h1>Welcome Andrés Morales to our #{projectName} project</h1>", message);
     }
 }
