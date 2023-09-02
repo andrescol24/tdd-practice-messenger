@@ -1,11 +1,13 @@
 package com.epam.ld.module2.testing.template;
 
+import com.epam.ld.module2.testing.RuntimeInformation;
+
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -28,6 +30,13 @@ public class Template {
     }
     public String getText() {
         return text;
+    }
+    public Optional<String> findMissingParameter(RuntimeInformation runtimeInformation) {
+        for(String parameterName : parameterNames) {
+            if(runtimeInformation.getValue(parameterName) == null)
+                return Optional.ofNullable(parameterName);
+        }
+        return Optional.empty();
     }
     private static Set<String> readParameters(String text) {
         Set<String> parameterNames = new HashSet<>();
