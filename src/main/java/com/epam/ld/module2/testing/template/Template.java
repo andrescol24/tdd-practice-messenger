@@ -32,6 +32,4 @@ public abstract class Template {
         }
         return parameterNames;
     }
-
-
 }
