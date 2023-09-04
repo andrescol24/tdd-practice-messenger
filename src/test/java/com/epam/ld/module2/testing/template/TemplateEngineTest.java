@@ -14,7 +14,7 @@ public class TemplateEngineTest {
 
     @Test
     public void generateMessageFromTextTemplateTest() {
-        Template template = new Template("<h1>Welcome #{name} to our #{projectName} project</h1>");
+        TextTemplate template = new TextTemplate("<h1>Welcome #{name} to our #{projectName} project</h1>");
         RuntimeInformation runtimeInformation = new RuntimeInformation();
         runtimeInformation.addValue("name", "Andrés Morales");
         runtimeInformation.addValue("projectName", "WKH-CEMS");
@@ -27,7 +27,7 @@ public class TemplateEngineTest {
     @Test
     public void generateMessageFromFileTemplateTest() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        Template template = new Template(new File(classLoader.getResource("template.html").getFile()));
+        Template template = new FileTemplate(new File(classLoader.getResource("template.html").getFile()));
         RuntimeInformation runtimeInformation = new RuntimeInformation();
         runtimeInformation.addValue("name", "Andrés Morales");
         runtimeInformation.addValue("projectName", "WKH-CEMS");
@@ -53,7 +53,7 @@ public class TemplateEngineTest {
 
     @Test
     public void generateMessageThrowsExpectedParameterExceptionTest() {
-        Template template = new Template("<h1>Welcome #{name} to our #{projectName} project</h1>");
+        TextTemplate template = new TextTemplate("<h1>Welcome #{name} to our #{projectName} project</h1>");
         RuntimeInformation runtimeInformation = new RuntimeInformation();
         runtimeInformation.addValue("name", "Andrés Morales");
 
@@ -65,7 +65,7 @@ public class TemplateEngineTest {
     }
     @Test
     public void generateMessageSupportPlaceholderTest() {
-        Template template = new Template("<h1>Welcome #{name} to our #{projectName} project</h1>");
+        TextTemplate template = new TextTemplate("<h1>Welcome #{name} to our #{projectName} project</h1>");
         RuntimeInformation runtimeInformation = new RuntimeInformation();
         runtimeInformation.addValue("name", "Andrés Morales");
         runtimeInformation.addValue("projectName", "#{projectName}");

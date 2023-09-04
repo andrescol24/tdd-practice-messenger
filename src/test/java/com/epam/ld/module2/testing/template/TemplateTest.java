@@ -15,7 +15,7 @@ public class TemplateTest {
     @Test
     public void textTemplateHasExpectedTextTest() {
         String text = "<h1>Welcome #{name} to our #{projectName} project</h1>";
-        Template template = new Template(text);
+        TextTemplate template = new TextTemplate(text);
         assertEquals(text, template.getText());
     }
     @Test
@@ -23,7 +23,7 @@ public class TemplateTest {
         String text = "<h1>Welcome #{name} to our #{projectName} project</h1>";
         Set<String> expectedParameters = new HashSet<>(Arrays.asList("name", "projectName"));
 
-        Template template = new Template(text);
+        TextTemplate template = new TextTemplate(text);
 
         assertEquals(expectedParameters, template.getParameterNames());
     }
@@ -31,7 +31,7 @@ public class TemplateTest {
     public void fileTemplateHasExpectedTextTest() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
 
-        Template template = new Template(new File(classLoader.getResource("template.html").getFile()));
+        Template template = new FileTemplate(new File(classLoader.getResource("template.html").getFile()));
 
         assertEquals("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
@@ -53,7 +53,7 @@ public class TemplateTest {
         ClassLoader classLoader = getClass().getClassLoader();
         Set<String> expectedParameters = new HashSet<>(Arrays.asList("name", "projectName", "leaderName"));
 
-        Template template = new Template(new File(classLoader.getResource("template.html").getFile()));
+        Template template = new FileTemplate(new File(classLoader.getResource("template.html").getFile()));
 
         assertEquals(expectedParameters, template.getParameterNames());
     }

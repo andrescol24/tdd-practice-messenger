@@ -8,10 +8,10 @@ public class MailServer {
     /**
      * Send notification.
      *
-     * @param addresses  the addresses
+     * @param client  Client
      * @param messageContent the message content
      */
-    public void send(String addresses, String messageContent) {
+    public void send(Client client, String messageContent) {
         System.out.println("Using a SMTP server to send the message...");
         System.out.println(messageContent);
     }
