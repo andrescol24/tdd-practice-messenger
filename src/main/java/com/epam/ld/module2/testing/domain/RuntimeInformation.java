@@ -1,10 +1,10 @@
-package com.epam.ld.module2.testing;
+package com.epam.ld.module2.testing.domain;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class RuntimeInformation {
-    private Map<String, String> values;
+    private final Map<String, String> values;
     public RuntimeInformation() {
         values = new HashMap<>();
     }

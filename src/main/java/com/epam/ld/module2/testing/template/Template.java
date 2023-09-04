@@ -1,6 +1,6 @@
 package com.epam.ld.module2.testing.template;
 
-import com.epam.ld.module2.testing.RuntimeInformation;
+import com.epam.ld.module2.testing.domain.RuntimeInformation;
 
 import java.util.HashSet;
 import java.util.Optional;

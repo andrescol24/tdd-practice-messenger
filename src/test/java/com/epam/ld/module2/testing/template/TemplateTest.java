@@ -2,7 +2,6 @@ package com.epam.ld.module2.testing.template;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -31,7 +30,7 @@ public class TemplateTest {
     public void fileTemplateHasExpectedTextTest() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
 
-        Template template = new FileTemplate(new File(classLoader.getResource("template.html").getFile()));
+        Template template = new FileTemplate(classLoader.getResource("template.html").getFile(), "");
 
         assertEquals("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
@@ -53,7 +52,7 @@ public class TemplateTest {
         ClassLoader classLoader = getClass().getClassLoader();
         Set<String> expectedParameters = new HashSet<>(Arrays.asList("name", "projectName", "leaderName"));
 
-        Template template = new FileTemplate(new File(classLoader.getResource("template.html").getFile()));
+        Template template = new FileTemplate(classLoader.getResource("template.html").getFile(), "");
 
         assertEquals(expectedParameters, template.getParameterNames());
     }

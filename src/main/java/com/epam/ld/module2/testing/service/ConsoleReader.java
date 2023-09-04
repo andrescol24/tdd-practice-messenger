@@ -1,7 +1,7 @@
-package com.epam.ld.module2.testing;
+package com.epam.ld.module2.testing.service;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.epam.ld.module2.testing.domain.RuntimeInformation;
+
 import java.util.Scanner;
 import java.util.Set;
 
@@ -11,13 +11,13 @@ public class ConsoleReader {
         scanner = new Scanner(System.in);
     }
 
-    public Map<String, String> readParameters(Set<String> parameterNames) {
-        Map<String, String> parameters = new HashMap<>();
+    public RuntimeInformation readParameters(Set<String> parameterNames) {
+        RuntimeInformation runtimeInformation = new RuntimeInformation();
         for(String parameterName : parameterNames) {
             String value = readParameter(parameterName);
-            parameters.put(parameterName, value);
+            runtimeInformation.addValue(parameterName, value);
         }
-        return parameters;
+        return runtimeInformation;
     }
 
     public String readParameter(String parameterName) {

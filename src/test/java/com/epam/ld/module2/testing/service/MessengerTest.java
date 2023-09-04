@@ -1,14 +1,16 @@
-package com.epam.ld.module2.testing;
+package com.epam.ld.module2.testing.service;
 
-import com.epam.ld.module2.testing.template.TextTemplate;
+import com.epam.ld.module2.testing.domain.Client;
+import com.epam.ld.module2.testing.domain.RuntimeInformation;
 import com.epam.ld.module2.testing.template.TemplateEngine;
+import com.epam.ld.module2.testing.template.TextTemplate;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class MessengerTest {
 
@@ -19,8 +21,7 @@ public class MessengerTest {
         RuntimeInformation runtimeInformation = new RuntimeInformation();
         runtimeInformation.addValue("name", "Andrés Morales");
         runtimeInformation.addValue("projectName", "WKH-CEMS");
-        Client client = new Client();
-        client.setAddresses("andres.morales");
+        Client client = new Client("andres.morales");
         ArgumentCaptor<Client> clientCaptor = ArgumentCaptor.forClass(Client.class);
 
         Messenger messenger = new Messenger(mailServer);

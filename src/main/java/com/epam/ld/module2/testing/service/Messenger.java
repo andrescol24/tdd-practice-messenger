@@ -1,14 +1,13 @@
-package com.epam.ld.module2.testing;
+package com.epam.ld.module2.testing.service;
 
 
-import com.epam.ld.module2.testing.template.TextTemplate;
-import com.epam.ld.module2.testing.template.TemplateEngine;
+import com.epam.ld.module2.testing.domain.Client;
 
 /**
  * The type Messenger.
  */
 public class Messenger {
-    private MailServer mailServer;
+    private final MailServer mailServer;
 
     /**
      * Instantiates a new Messenger.

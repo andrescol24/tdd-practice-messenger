@@ -1,10 +1,9 @@
 package com.epam.ld.module2.testing.template;
 
-import com.epam.ld.module2.testing.RuntimeInformation;
+import com.epam.ld.module2.testing.domain.RuntimeInformation;
 import com.epam.ld.module2.testing.exception.ExpectedParameterException;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,7 +26,7 @@ public class TemplateEngineTest {
     @Test
     public void generateMessageFromFileTemplateTest() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        Template template = new FileTemplate(new File(classLoader.getResource("template.html").getFile()));
+        Template template = new FileTemplate(classLoader.getResource("template.html").getFile(), "");
         RuntimeInformation runtimeInformation = new RuntimeInformation();
         runtimeInformation.addValue("name", "Andrés Morales");
         runtimeInformation.addValue("projectName", "WKH-CEMS");

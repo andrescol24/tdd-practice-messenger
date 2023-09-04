@@ -1,10 +1,9 @@
-package com.epam.ld.module2.testing;
+package com.epam.ld.module2.testing.service;
 
+import com.epam.ld.module2.testing.domain.RuntimeInformation;
 import com.epam.ld.module2.testing.template.Template;
 import com.epam.ld.module2.testing.template.TextTemplate;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
@@ -18,10 +17,10 @@ public class ConsoleReaderTest {
         doReturn("Andres").when(consoleReader).readParameter(eq("name"));
         doReturn("WKH-CEMS").when(consoleReader).readParameter(eq("team"));
 
-        Map<String, String> parameters = consoleReader.readParameters(template.getParameterNames());
+        RuntimeInformation runtimeInformation = consoleReader.readParameters(template.getParameterNames());
 
-        assertEquals("Andres", parameters.get("name"));
-        assertEquals("WKH-CEMS", parameters.get("team"));
+        assertEquals("Andres", runtimeInformation.getValue("name"));
+        assertEquals("WKH-CEMS", runtimeInformation.getValue("team"));
         verify(consoleReader, times(2)).readParameter(any());
     }
 }
