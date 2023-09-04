@@ -15,12 +15,12 @@ public class TemplateEngineTest {
     public void generateMessageFromTextTemplateTest() {
         TextTemplate template = new TextTemplate("<h1>Welcome #{name} to our #{projectName} project</h1>");
         RuntimeInformation runtimeInformation = new RuntimeInformation();
-        runtimeInformation.addValue("name", "Andrés Morales");
-        runtimeInformation.addValue("projectName", "WKH-CEMS");
+        runtimeInformation.addValue("name", "Andres");
+        runtimeInformation.addValue("projectName", "Tetris");
 
         TemplateEngine templateEngine = new TemplateEngine();
         String message = templateEngine.generateMessage(template, runtimeInformation);
-        assertEquals("<h1>Welcome Andrés Morales to our WKH-CEMS project</h1>", message);
+        assertEquals("<h1>Welcome Andres to our Tetris project</h1>", message);
     }
 
     @Test
@@ -28,8 +28,8 @@ public class TemplateEngineTest {
         ClassLoader classLoader = getClass().getClassLoader();
         Template template = new FileTemplate(classLoader.getResource("template.html").getFile(), "");
         RuntimeInformation runtimeInformation = new RuntimeInformation();
-        runtimeInformation.addValue("name", "Andrés Morales");
-        runtimeInformation.addValue("projectName", "WKH-CEMS");
+        runtimeInformation.addValue("name", "Andres");
+        runtimeInformation.addValue("projectName", "Tetris");
         runtimeInformation.addValue("leaderName", "Pepito Perez");
 
         TemplateEngine templateEngine = new TemplateEngine();
@@ -43,8 +43,8 @@ public class TemplateEngineTest {
                 "    <title>Document</title>\n" +
                 "</head>\n" +
                 "<body>\n" +
-                "<h1>Hi Andrés Morales!</h1>\n" +
-                "<p>Welcome to WKH-CEMS project, we hope you enjoy your new journey here.</p>\n" +
+                "<h1>Hi Andres!</h1>\n" +
+                "<p>Welcome to Tetris project, we hope you enjoy your new journey here.</p>\n" +
                 "<p>If you have any concern do not hesitate to contact our leader Pepito Perez</p>\n" +
                 "</body>\n" +
                 "</html>", message);

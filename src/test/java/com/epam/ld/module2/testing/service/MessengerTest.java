@@ -19,9 +19,9 @@ public class MessengerTest {
         MailServer mailServer = mock(MailServer.class);
         TextTemplate template = new TextTemplate("<h1>Welcome #{name} to our #{projectName} project</h1>");
         RuntimeInformation runtimeInformation = new RuntimeInformation();
-        runtimeInformation.addValue("name", "Andrés Morales");
-        runtimeInformation.addValue("projectName", "WKH-CEMS");
-        Client client = new Client("andres.morales");
+        runtimeInformation.addValue("name", "Andres");
+        runtimeInformation.addValue("projectName", "Tetris");
+        Client client = new Client("andres");
         ArgumentCaptor<Client> clientCaptor = ArgumentCaptor.forClass(Client.class);
 
         Messenger messenger = new Messenger(mailServer);
@@ -29,7 +29,7 @@ public class MessengerTest {
         String message = templateEngine.generateMessage(template, runtimeInformation);
         messenger.sendMessage(client, message);
 
-        verify(mailServer).send(clientCaptor.capture(), eq("<h1>Welcome Andrés Morales to our WKH-CEMS project</h1>"));
-        assertEquals("andres.morales", clientCaptor.getValue().getAddresses());
+        verify(mailServer).send(clientCaptor.capture(), eq("<h1>Welcome Andres to our Tetris project</h1>"));
+        assertEquals("andres", clientCaptor.getValue().getAddresses());
     }
 }

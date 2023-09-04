@@ -15,12 +15,12 @@ public class ConsoleReaderTest {
         Template template = new TextTemplate("<h1>Hello #{name}, this is a greating from #{team} team</h1>");
         ConsoleReader consoleReader = spy(new ConsoleReader());
         doReturn("Andres").when(consoleReader).readParameter(eq("name"));
-        doReturn("WKH-CEMS").when(consoleReader).readParameter(eq("team"));
+        doReturn("Tetris").when(consoleReader).readParameter(eq("team"));
 
         RuntimeInformation runtimeInformation = consoleReader.readParameters(template.getParameterNames());
 
         assertEquals("Andres", runtimeInformation.getValue("name"));
-        assertEquals("WKH-CEMS", runtimeInformation.getValue("team"));
+        assertEquals("Tetris", runtimeInformation.getValue("team"));
         verify(consoleReader, times(2)).readParameter(any());
     }
 }
