@@ -24,4 +24,7 @@ public class FileTemplate extends Template{
         }
         return textBuild.toString();
     }
+    public String getOutputFilePath() {
+        return outputFilePath;
+    }
 }

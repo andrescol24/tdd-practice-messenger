@@ -7,6 +7,7 @@ import com.epam.ld.module2.testing.service.Messenger;
 import com.epam.ld.module2.testing.template.FileTemplate;
 import com.epam.ld.module2.testing.template.Template;
 import com.epam.ld.module2.testing.template.TemplateEngine;
+import com.epam.ld.module2.testing.template.TemplateOutputManager;
 import com.epam.ld.module2.testing.template.TextTemplate;
 
 import java.io.File;
@@ -43,6 +44,8 @@ public class TemplateApplication {
 
         String message = this.readRuntimeInformationAndGetMessage(template);
         messenger.sendMessage(client, message);
+        TemplateOutputManager manager = new TemplateOutputManager(template);
+        manager.writeResult(message);
     }
 
     private String readRuntimeInformationAndGetMessage(Template template) {
