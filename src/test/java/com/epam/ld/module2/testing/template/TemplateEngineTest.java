@@ -1,8 +1,11 @@
 package com.epam.ld.module2.testing.template;
 
+import com.epam.ld.module2.testing.TextTemplateArgumentsProvider;
 import com.epam.ld.module2.testing.domain.RuntimeInformation;
 import com.epam.ld.module2.testing.exception.ExpectedParameterException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import java.io.IOException;
 
@@ -11,16 +14,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TemplateEngineTest {
 
-    @Test
-    public void generateMessageFromTextTemplateTest() {
-        TextTemplate template = new TextTemplate("<h1>Welcome #{name} to our #{projectName} project</h1>");
-        RuntimeInformation runtimeInformation = new RuntimeInformation();
-        runtimeInformation.addValue("name", "Andres");
-        runtimeInformation.addValue("projectName", "Tetris");
+    @ParameterizedTest
+    @ArgumentsSource(TextTemplateArgumentsProvider.class)
+    public void generateMessageFromTextTemplateTest(String templateText, RuntimeInformation runtimeInformation, String expected) {
+        TextTemplate template = new TextTemplate(templateText);
 
         TemplateEngine templateEngine = new TemplateEngine();
         String message = templateEngine.generateMessage(template, runtimeInformation);
-        assertEquals("<h1>Welcome Andres to our Tetris project</h1>", message);
+
+        assertEquals(expected, message);
     }
 
     @Test
