@@ -95,3 +95,16 @@ tasks.withType(Pmd) {
     }
 }
 
+task runTextTests(type: Test) {
+    useJUnitPlatform {
+        includeTags("TextTemplate")
+    }
+}
+
+// Tagging and filtering allow us to filter test by tags, we could run only Unit Test or only integration tests
+task runFileTests(type: Test) {
+    useJUnitPlatform {
+        includeTags("FileTemplate")
+    }
+}
+

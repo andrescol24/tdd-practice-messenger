@@ -3,6 +3,7 @@ package com.epam.ld.module2.testing.template;
 import com.epam.ld.module2.testing.TextTemplateArgumentsProvider;
 import com.epam.ld.module2.testing.domain.RuntimeInformation;
 import com.epam.ld.module2.testing.exception.ExpectedParameterException;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
@@ -16,6 +17,7 @@ public class TemplateEngineTest {
 
     @ParameterizedTest
     @ArgumentsSource(TextTemplateArgumentsProvider.class)
+    @Tag("TextTemplate")
     public void generateMessageFromTextTemplateTest(String templateText, RuntimeInformation runtimeInformation, String expected) {
         TextTemplate template = new TextTemplate(templateText);
 
@@ -26,6 +28,7 @@ public class TemplateEngineTest {
     }
 
     @Test
+    @Tag("FileTemplate")
     public void generateMessageFromFileTemplateTest() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
         Template template = new FileTemplate(classLoader.getResource("template.html").getFile(), "");
@@ -53,6 +56,7 @@ public class TemplateEngineTest {
     }
 
     @Test
+    @Tag("TextTemplate")
     public void generateMessageThrowsExpectedParameterExceptionTest() {
         TextTemplate template = new TextTemplate("<h1>Welcome #{name} to our #{projectName} project</h1>");
         RuntimeInformation runtimeInformation = new RuntimeInformation();
@@ -65,6 +69,7 @@ public class TemplateEngineTest {
                 "projectName parameter not found in the runtime variables");
     }
     @Test
+    @Tag("TextTemplate")
     public void generateMessageSupportPlaceholderTest() {
         TextTemplate template = new TextTemplate("<h1>Welcome #{name} to our #{projectName} project</h1>");
         RuntimeInformation runtimeInformation = new RuntimeInformation();
