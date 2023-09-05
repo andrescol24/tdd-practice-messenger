@@ -5,11 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class TemplateOutputManager {
-    private final Template template;
-    public TemplateOutputManager(Template template) {
-        this.template = template;
-    }
-    public void writeResult(String message) throws IOException {
+    public void writeResult(Template template, String message) throws IOException {
         if (template instanceof FileTemplate) {
             FileTemplate fileTemplate = (FileTemplate) template;
             Files.write(new File(fileTemplate.getOutputFilePath()).toPath(), message.getBytes());

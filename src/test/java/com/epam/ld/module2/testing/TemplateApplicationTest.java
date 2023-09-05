@@ -3,6 +3,7 @@ package com.epam.ld.module2.testing;
 import com.epam.ld.module2.testing.domain.RuntimeInformation;
 import com.epam.ld.module2.testing.service.ConsoleReader;
 import com.epam.ld.module2.testing.service.Messenger;
+import com.epam.ld.module2.testing.template.TemplateOutputManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,14 +14,13 @@ import static org.mockito.Mockito.*;
 public class TemplateApplicationTest {
     private TemplateApplication templateApplication;
     private ConsoleReader consoleReader;
-    private Messenger messenger;
+    private TemplateOutputManager templateOutputManager;
     @BeforeEach
     public void setup() {
         consoleReader = mock(ConsoleReader.class);
-        messenger = mock(Messenger.class);
-        templateApplication = new TemplateApplication(consoleReader, messenger);
-
-
+        Messenger messenger = mock(Messenger.class);
+        templateOutputManager = mock(TemplateOutputManager.class);
+        templateApplication = new TemplateApplication(consoleReader, messenger, templateOutputManager);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class TemplateApplicationTest {
 
         templateApplication.run(args);
 
-        verify(consoleReader).readParameters(any());
+        verify(templateOutputManager).writeResult(any(), anyString());
     }
 
     @Test

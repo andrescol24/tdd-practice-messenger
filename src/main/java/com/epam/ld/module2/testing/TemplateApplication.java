@@ -16,9 +16,11 @@ import java.io.IOException;
 public class TemplateApplication {
     private final ConsoleReader consoleReader;
     private final Messenger messenger;
-    public TemplateApplication(ConsoleReader consoleReader, Messenger messenger) {
+    private final TemplateOutputManager templateOutputManager;
+    public TemplateApplication(ConsoleReader consoleReader, Messenger messenger, TemplateOutputManager templateOutputManager) {
         this.consoleReader = consoleReader;
         this.messenger = messenger;
+        this.templateOutputManager = templateOutputManager;
     }
 
     public void run(String[] args) throws IOException {
@@ -44,8 +46,7 @@ public class TemplateApplication {
 
         String message = this.readRuntimeInformationAndGetMessage(template);
         messenger.sendMessage(client, message);
-        TemplateOutputManager manager = new TemplateOutputManager(template);
-        manager.writeResult(message);
+        templateOutputManager.writeResult(template, message);
     }
 
     private String readRuntimeInformationAndGetMessage(Template template) {

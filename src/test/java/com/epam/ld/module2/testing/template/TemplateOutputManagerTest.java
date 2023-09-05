@@ -7,7 +7,6 @@ import org.junit.jupiter.api.io.TempDir;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,7 +20,7 @@ public class TemplateOutputManagerTest {
         String inputPath = classLoader.getResource("template.html").getFile();
         File outputFile = new File(tempFile, "template_out.html");
         Template template = new FileTemplate(inputPath, outputFile.getPath());
-        TemplateOutputManager templateOutputManager = new TemplateOutputManager(template);
+        TemplateOutputManager templateOutputManager = new TemplateOutputManager();
         RuntimeInformation runtimeInformation = new RuntimeInformation();
         runtimeInformation.addValue("name", "Andres");
         runtimeInformation.addValue("projectName", "Tetris");
@@ -29,7 +28,7 @@ public class TemplateOutputManagerTest {
         TemplateEngine engine = new TemplateEngine();
         String message = engine.generateMessage(template, runtimeInformation);
 
-        templateOutputManager.writeResult(message);
+        templateOutputManager.writeResult(template, message);
 
         String result = Files.readString(outputFile.toPath());
         assertEquals("<!DOCTYPE html>\n" +
